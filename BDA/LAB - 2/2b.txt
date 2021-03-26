@@ -1,0 +1,239 @@
+cqlsh CREATE KEYSPACE Students WITH REPLICATION = { 'class''SimpleStrategy', 'replication_factor'1};
+cqlsh DESCRIBE KEYSPACES
+
+students  system_schema  system_auth  system  system_distributed  system_traces
+
+cqlsh USE Students
+   ... ;
+cqlshstudents CREATE TABLE Student_info{
+            ... RollNo int PRIMARY KEY,
+            ... Name text,
+            ... DateOfJoin timestamp,
+            ... LastExamPercent doule
+            ... };
+
+cqlshstudents DESCRIBE TABLE Student_info;
+
+CREATE TABLE students.student_info (
+    rollno int PRIMARY KEY,
+    dateofjoin timestamp,
+    lastexampercent double,
+    name text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys' 'ALL', 'rows_per_partition' 'NONE'}
+    AND comment = ''
+    AND compaction = {'class' 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold' '32', 'min_threshold' '4'}
+    AND compression = {'chunk_length_in_kb' '64', 'class' 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlshstudents BEGIN BATCH INSERT INTO Student_info(RollNo, Name, DateOfJoin, LastExamPercent) VALUES(1,'Varad','2021-03-12',95.5) APPLY BATCH;
+BEGIN BATCH INSERT INTO Student_info(RollNo, Name, DateOfJoin, LastExamPercent) VALUES(2,'Shashank','2021-03-12',98.5) APPLY BATCH;
+BEGIN BATCH INSERT INTO Student_info(RollNo, Name, DateOfJoin, LastExamPercent) VALUES(5,'Suman','2021-03-11',97.5) APPLY BATCH;
+
+cqlshstudents SELECT  FROM Student_info;
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+---------
+      5  2021-03-10 183000.000000+0000             97.5    Suman
+      1  2021-03-11 183000.000000+0000             95.5    Varad
+      2  2021-03-11 183000.000000+0000             98.5 Shashank
+
+(3 rows)
+
+
+cqlshstudents SELECT  FROM Student_info WHERE RollNo IN (1,2);
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+---------
+      1  2021-03-11 183000.000000+0000             95.5    Varad
+      2  2021-03-11 183000.000000+0000             98.5 Shashank
+
+(2 rows)
+cqlshstudents CREATE INDEX ON Student_info(Name);
+cqlshstudents SELECt  FROM STudent_info WHERE Name='Shashank';
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+---------
+      2  2021-03-11 183000.000000+0000             98.5  Shashank
+
+(1 rows)
+cqlshstudents SELECT RollNo,Name, LastExamPercent
+            ... FROM Student_info LIMIT 2;
+
+ rollno  name    lastexampercent
+--------+--------+-----------------
+      5   Suman             97.5
+      1   Varad             95.5
+
+(2 rows)
+
+cqlshstudents SELECT RollNo,LastExamPercent as Score FROM Student_info;
+
+ rollno  Score
+--------+-------
+      5   97.5
+      1   95.5
+      2   98.5
+
+(3 rows)
+cqlshstudents UPDATE Student_info 
+            ... SET LastExamPercent=97
+            ... WHERE RollNo=1;
+cqlshstudents SELECT  FROM Student_info;
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+---------
+      5  2021-03-10 183000.000000+0000             97.5    Suman
+      1  2021-03-11 183000.000000+0000               97    Varad
+      2  2021-03-11 183000.000000+0000             98.5 Shashank
+
+(3 rows)
+cqlshstudents DELETE FROM Student_info WHERE RollNo=2;
+cqlshstudents SELECT  FROM Student_info;
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+--------
+      5  2021-03-10 183000.000000+0000             97.5   Suman
+      1  2021-03-11 183000.000000+0000               97   Varad
+
+(2 rows)
+cqlshstudents DELETE LastExamPercent FROM Student_info where RollNo=1;
+cqlshstudents SELECT  FROM Student_infocqlshstudents SELECT RollNo,LastExamPercent as Score FROM Student_info;
+
+ rollno  Score
+--------+-------
+      5   97.5
+      1   95.5
+      2   98.5
+
+(3 rows)
+cqlshstudents UPDATE Student_info 
+            ... SET LastExamPercent=97
+            ... WHERE RollNo=1;
+cqlshstudents SELECT  FROM Student_info;
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+---------
+      5  2021-03-10 183000.000000+0000             97.5    Suman
+      1  2021-03-11 183000.000000+0000               97    Varad
+      2  2021-03-11 183000.000000+0000             98.5 Shashank
+
+(3 rows)
+cqlshstudents DELETE FROM Student_info WHERE RollNo=2;
+cqlshstudents SELECT  FROM Student_info;
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+--------
+      5  2021-03-10 183000.000000+0000             97.5   Suman
+      1  2021-03-11 183000.000000+0000               97   Varad
+
+(2 rows)
+cqlshstudents DELETE LAStExamPercent FROM Student_info where RollNo=1;
+cqlshstudents SELECT  FROM Student_info;
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+--------
+      5  2021-03-10 183000.000000+0000             97.5   Suman
+      1  2021-03-11 183000.000000+0000             null   Varad
+
+(2 rows)
+;
+
+ rollno  dateofjoin                       lastexampercent  name
+--------+---------------------------------+-----------------+--------
+      5  2021-03-10 183000.000000+0000             97.5   Suman
+      1  2021-03-11 183000.000000+0000             null   Varad
+
+(2 rows)
+
+
+
+cqlshstudents CREATE TABLE Project_Details(
+            ... pid int,
+            ... pname text,
+            ... stud_name text,
+            ... duration int,
+            ... PRIMARY KEY(pid,pname));
+cqlshstudents DESCRIBE TABLE Project_Details;
+
+CREATE TABLE students.project_details (
+    pid int,
+    pname text,
+    duration int,
+    stud_name text,
+    PRIMARY KEY (pid, pname)
+) WITH CLUSTERING ORDER BY (pname ASC)
+    AND bloom_filter_fp_chance = 0.01
+    AND caching = {'keys' 'ALL', 'rows_per_partition' 'NONE'}
+    AND comment = ''
+    AND compaction = {'class' 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold' '32', 'min_threshold' '4'}
+    AND compression = {'chunk_length_in_kb' '64', 'class' 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlshstudents BEGIN BATCH INSERT INTO Project_Details(pid,pname,duration,stud_name) VALUES(1,'LMS',3,'Shashank') INSERT INTO Project_Details(pid,pname,duration,stud_name) VALUES(2,'Colab',4,'Varad') APPLY BATCH;
+
+cqlshstudents SELECT  FROM Project_Details;
+
+ pid  pname  duration  stud_name
+-----+-------+----------+-----------
+   1    LMS         3   Shashank
+   2  Colab         4      Varad
+
+(2 rows)
+
+
+cqlshstudents SELECT  FROM Project_Details
+            ... WHERE PID=2;
+
+ pid  pname  duration  stud_name
+-----+-------+----------+-----------
+   2  Colab         4      Varad
+
+(1 rows)
+
+cqlshstudents CREATE INDEX ON Project_Details(stud_name);
+cqlshstudents SELECT  FROM Project_Details 
+            ... WHERE stud_name='Shashank';
+
+ pid  pname  duration  stud_name
+-----+-------+----------+-----------
+   1    LMS         3   Shashank
+
+(1 rows)
+
+
+cqlshstudents UPDATE Project_Details SET duration=5 WHERE pid=1 and pname='LMS';
+cqlshstudents SELECT  FROM Project_Details;
+
+ pid  pname  duration  stud_name
+-----+-------+----------+-----------
+   1    LMS         5   Shashank
+   2  Colab         4      Varad
+
+(2 rows)
+
+cqlshstudents DELETE duration FROM Project_Details where pid=2 and pname='Colab';
+cqlshstudents SELECT  FROM Project_Details;
+
+ pid  pname  duration  stud_name
+-----+-------+----------+-----------
+   1    LMS         5   Shashank
+   2  Colab      null      Varad
+
+(2 rows)
