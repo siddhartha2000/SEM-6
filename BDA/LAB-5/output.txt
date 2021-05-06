@@ -1,0 +1,73 @@
+C:\hadoop-3.2.1>hadoop fs -ls C:\hadoop-3.2.1\sbin
+Found 28 items
+drwx------   - Admin          None          0 2021-04-22 14:56 C:/hadoop-3.2.1/sbin/FederationStateStore
+-rwx------   1 Admin          None       2756 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/distribute-exclude.sh
+-rwx------   1 Admin          None       1983 2019-09-10 21:27 C:/hadoop-3.2.1/sbin/hadoop-daemon.sh
+-rwx------   1 Admin          None       2522 2019-09-10 21:27 C:/hadoop-3.2.1/sbin/hadoop-daemons.sh
+-rwx------   1 Admin          None       1542 2019-09-10 21:34 C:/hadoop-3.2.1/sbin/httpfs.sh
+-rwx------   1 Admin          None       1500 2019-09-10 21:28 C:/hadoop-3.2.1/sbin/kms.sh
+-rwx------   1 Admin          None       1841 2019-09-10 22:06 C:/hadoop-3.2.1/sbin/mr-jobhistory-daemon.sh
+-rwx------   1 Admin          None       2086 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/refresh-namenodes.sh
+drwxr-xr-x   - Administrators None          0 2021-04-22 15:16 C:/hadoop-3.2.1/sbin/shrey_lab
+-rwx------   1 Admin          None       1779 2019-09-10 21:27 C:/hadoop-3.2.1/sbin/start-all.cmd
+-rwx------   1 Admin          None       2221 2019-09-10 21:27 C:/hadoop-3.2.1/sbin/start-all.sh
+-rwx------   1 Admin          None       1880 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/start-balancer.sh
+-rwx------   1 Admin          None       1401 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/start-dfs.cmd
+-rwx------   1 Admin          None       5170 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/start-dfs.sh
+-rwx------   1 Admin          None       1793 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/start-secure-dns.sh
+-rwx------   1 Admin          None       1571 2019-09-10 22:03 C:/hadoop-3.2.1/sbin/start-yarn.cmd
+-rwx------   1 Admin          None       3342 2019-09-10 22:03 C:/hadoop-3.2.1/sbin/start-yarn.sh
+-rwx------   1 Admin          None       1770 2019-09-10 21:27 C:/hadoop-3.2.1/sbin/stop-all.cmd
+-rwx------   1 Admin          None       2166 2019-09-10 21:27 C:/hadoop-3.2.1/sbin/stop-all.sh
+-rwx------   1 Admin          None       1783 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/stop-balancer.sh
+-rwx------   1 Admin          None       1455 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/stop-dfs.cmd
+-rwx------   1 Admin          None       3898 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/stop-dfs.sh
+-rwx------   1 Admin          None       1756 2019-09-10 21:31 C:/hadoop-3.2.1/sbin/stop-secure-dns.sh
+-rwx------   1 Admin          None       1642 2019-09-10 22:03 C:/hadoop-3.2.1/sbin/stop-yarn.cmd
+-rwx------   1 Admin          None       3083 2019-09-10 22:03 C:/hadoop-3.2.1/sbin/stop-yarn.sh
+-rwx------   1 Admin          None       1982 2019-09-10 21:27 C:/hadoop-3.2.1/sbin/workers.sh
+-rwx------   1 Admin          None       1814 2019-09-10 22:03 C:/hadoop-3.2.1/sbin/yarn-daemon.sh
+-rwx------   1 Admin          None       2328 2019-09-10 22:03 C:/hadoop-3.2.1/sbin/yarn-daemons.sh
+
+C:\hadoop-3.2.1>
+C:\hadoop-3.2.1\sbin>jps
+14560 DataNode
+4960 ResourceManager
+5936 NameNode
+768 NodeManager
+14636 Jps
+
+
+C:\hadoop-3.2.1>hadoop fs -ls /D:/College/sem6/BDA/BDA
+Found 8 items
+d---------   - Admin None       4096 2021-04-15 15:45 D:/College/sem6/BDA/BDA/.git
+d---------   - Admin None          0 2021-04-01 14:23 D:/College/sem6/BDA/BDA/LAB 1
+d---------   - Admin None          0 2021-04-01 14:23 D:/College/sem6/BDA/BDA/Lab 2
+d---------   - Admin None          0 2021-04-01 14:35 D:/College/sem6/BDA/BDA/Lab 3
+d---------   - Admin None          0 2021-04-01 14:43 D:/College/sem6/BDA/BDA/Lab 4
+d---------   - Admin None          0 2021-04-15 15:44 D:/College/sem6/BDA/BDA/Lab 5
+d---------   - Admin None          0 2021-04-22 14:37 D:/College/sem6/BDA/BDA/Lab6
+----------   1 Admin None          5 2021-04-01 14:23 D:/College/sem6/BDA/BDA/README.md
+
+C:\hadoop-3.2.1>hadoop fs -mkdir /D:/College/sem6/BDA/BDA/Lab6
+
+C:\hadoop-3.2.1>hadoop fs -ls /D:/College/sem6/BDA/BDA
+Found 8 items
+d---------   - Admin          None       4096 2021-04-15 15:45 D:/College/sem6/BDA/BDA/.git
+d---------   - Admin          None          0 2021-04-01 14:23 D:/College/sem6/BDA/BDA/LAB 1
+d---------   - Admin          None          0 2021-04-01 14:23 D:/College/sem6/BDA/BDA/Lab 2
+d---------   - Admin          None          0 2021-04-01 14:35 D:/College/sem6/BDA/BDA/Lab 3
+d---------   - Admin          None          0 2021-04-01 14:43 D:/College/sem6/BDA/BDA/Lab 4
+d---------   - Admin          None          0 2021-04-15 15:44 D:/College/sem6/BDA/BDA/Lab 5
+drwxr-xr-x   - Administrators None          0 2021-04-22 15:19 D:/College/sem6/BDA/BDA/Lab6
+----------   1 Admin          None          5 2021-04-01 14:23 D:/College/sem6/BDA/BDA/README.md
+
+C:\hadoop-3.2.1>hadoop fs -copyFromLocal /C:/Users/shrey/Desktop/file1.txt   /D:/College/sem6/BDA/BDA/Lab6/test.txt
+C:\hadoop-3.2.1>type D:\College\sem6\BDA\BDA\Lab6\test.txt
+hi how are you
+how is your job
+how is your family
+how is your brother
+how is your sister
+C:\hadoop-3.2.1>
+
