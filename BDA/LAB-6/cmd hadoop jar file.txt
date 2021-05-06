@@ -1,0 +1,10 @@
+hadoop fs -ls C:\hadoop\bin\wordcount\input C:\hadoop\bin\wordcount\input\test.txt
+
+hadoop fs -mkdir /input
+
+hadoop fs -touch /input/test  (not needed)
+
+hadoop fs -put /home/file.txt /input  
+	(-copyFromLocal)
+
+hadoop jar wc.jar WordCount /input /temp
